@@ -15,7 +15,7 @@ editor=""/>
    ms.date="01/12/2023"
    ms.author="fabferri" />
 
-# First Python project with Azure SDK for Python
+# Starting with Azure SDK for Python: first project
 [Azure for Python](https://learn.microsoft.com/en-us/azure/developer/python/) documentation contains all the details required to use the Azure Python SDK. <br>
 The purpose of this article is not to replace the official documentation, but a step-by-step for boost the starting. <br>
 
