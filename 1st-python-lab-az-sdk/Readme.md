@@ -15,7 +15,7 @@ editor=""/>
    ms.date="01/12/2023"
    ms.author="fabferri" />
 
-# Your first Python project with Azure SDK for Python
+# First Python project with Azure SDK for Python
 [Azure for Python](https://learn.microsoft.com/en-us/azure/developer/python/) documentation contains all the details required to use the Azure Python SDK. <br>
 The purpose of this article is not to replace the official documentation, but a step-by-step for boost the starting. <br>
 
@@ -170,8 +170,8 @@ Copy this value to a temporary location in a text editor as you will need it in 
 [![17]][17]
 
 At this stage you have the following Azure elements can be used for authentication to the Azure resources:
-- **Tenand ID**
-- **Azure subscription ID**
+- **Tenant ID**
+- **Azure Subscription ID**
 - **Application (client) ID**
 - **Application (client) password**
 
@@ -216,7 +216,7 @@ AZURE_CLIENT_SECRET = '[YOUR SERVICE PRINCIPAL SECRET VALUE]'
 [![23]][23]
 
 > [!NOTE] 
-> In the **.env** file replace the strings: 
+> In the **.env** file replace the strings: <br>
 > [YOUR SUBSCRIPTION ID] <br> 
 > [YOUR TENANT ID] <br>
 > [YOUR SERVICE PRINCIPAL APPLICATION (CLIENT) ID] <br> 
@@ -353,7 +353,7 @@ print(f"Updated resource group {rg_result.name} with tags")
 # poller = resource_client.resource_groups.begin_delete(rg_result.name)
 # result = poller.result()
 ```
-Run the Python program **provision_rg.py**
+Run **provision_rg.py**
 
 
 `Tags: Python, Visual Studio Code` <br>
