@@ -297,9 +297,9 @@ print(f"{now} - added nsg to the subnet: {subnet_result.name}")
 <br>
 
 > [!NOTE]
-> Before running the Python code, 
+> Before running the **provision_vm.py** code:
 > 1. set the right value of administrator password in the variable **PASSWORD**.
-> 2. set the value of application principle in the file **.env**
+> 2. set the values of variables (application service principle, Tenant, Subscription) in the file **.env**
 
 
 `Tags: Python, Visual Studio Code` <br>
