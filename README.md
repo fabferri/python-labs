@@ -4,3 +4,4 @@
 - [Create an Azure VM with SDK for Python](https://github.com/fabferri/python-labs/tree/main/az-sdk-create-az-vm)
 - [examples]
    - [asyncio examples](https://github.com/fabferri/python-labs/tree/main/examples/asyncio)
+   - [blended notes](https://github.com/fabferri/python-labs/tree/main/examples/blended-notes)
