@@ -154,7 +154,7 @@ virtual environment is a named, isolated, working copy of Python that that maint
 | List linked packages in a conda environment| **conda list** |
 | If the environment is not activated, to see a list of all packages installed in a specific environment| **conda list -n myenv** |
 
-> [!NOTE] <br>
+> [!NOTE] 
 > The **conda env remove** command deletes the environment's directory and all its contents. <br>
 > In some cases, you may encounter a corrupted Conda environment that cannot be removed using the standard conda env remove command. In such cases, you can manually delete the environment by removing its directory from the envs folder in your Conda installation. <br>
 >
