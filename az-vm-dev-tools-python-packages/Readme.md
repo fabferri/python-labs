@@ -169,14 +169,15 @@ virtual environment is a named, isolated, working copy of Python that that maint
   pip install --upgrade pip
 ```
 
-## <a name="Install Tensorflow"></a>4. Install Tensorflow in the virtual environment
-Create a virtual environment and install tensorflow:
+## <a name="Install TensorFlow"></a>4. Install TensorFlow in the virtual environment
+Create a virtual environment and install TensorFlow:
 ```bash
 conda create -n myenv tensorflow
 ```
 <br>
 OR inside the virtual environment:
-```
+
+```bash
 conda install tensorflow
 ```
 <br>
