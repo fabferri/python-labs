@@ -146,7 +146,7 @@ virtual environment is a named, isolated, working copy of Python that that maint
 | Create an enviroment with a specific version of Python and add a specific package| **conda create -n myenv python** <br> **conda install -n myenv scipy** |
 | Create an environment with a specific version of Python and multiple packages    | **conda create -n myenv python=3.9 scipy=0.17.3 astroid babel** |
 | Make a silent installation      | **conda create -n myenv python=3.9 -y**        |
-| Activate the virtual environment| **conda activate myenv** <br> After activation the prompt change into: **(myenv) username@vm1:~$**|
+| Activate the virtual environment| **conda activate myenv** <br> After activation the prompt change into: <br> **(myenv) username@vm1:~$**|
 | Deactivate an active environment| **conda deactivate myenv**        |
 | Remove a deactivated environment| **conda env remove --name myenv** |
 | exit/deactivate the virtual environment| **conda deactivate**       |
