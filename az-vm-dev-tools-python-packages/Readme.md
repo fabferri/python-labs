@@ -135,106 +135,30 @@ EOF
 ## <a name="virtual environment"></a>3. Virtual environments for Python with conda
 virtual environment is a named, isolated, working copy of Python that that maintains its own files, directories, and paths so that you can work with specific versions of libraries or Python itself without affecting other Python projects. Virtual environments make it easy to cleanly separate different projects and avoid problems with different dependencies and version requirements across components. The conda command is the preferred interface for managing installations and virtual environments with the Anaconda Python distribution. <br>
 
-Check conda version:
-```
-conda -V
-```
-Check Miniconda:
-```bash
-conda info
-```
+| Description                  | conda command                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------- |
+| Check conda version          | **conda -V**                   |
+| Check Miniconda              | **conda info**                 |
+| Update Miniconda             | **conda update --all**         |
+| Create a virtual environment for your project|  **conda create --name myenv** <br> (replace myenv with the environment name) |
+| Create an environment with a specific version of Python| **conda create --name myenv python=3.9**                            |
+| Create an environment with a specific package| **conda create -n myenv scipy**                                               |
+| Create an enviroment with a specific version of Python and add a specific package| **conda create -n myenv python** <br> **conda install -n myenv scipy** |
+| Create an environment with a specific version of Python and multiple packages    | **conda create -n myenv python=3.9 scipy=0.17.3 astroid babel** |
+| Make a silent installation      | **conda create -n myenv python=3.9 -y**        |
+| Activate the virtual environment| **conda activate myenv** <br> After activation the prompt change into: **(myenv) username@vm1:~$**|
+| Deactivate an active environment| **conda deactivate myenv**        |
+| Remove a deactivated environment| **conda env remove --name myenv** |
+| exit/deactivate the virtual environment| **conda deactivate**       |
+| List all the Conda environments| **conda env list** |
+| List linked packages in a conda environment| **conda list** |
+| If the environment is not activated, to see a list of all packages installed in a specific environment| **conda list -n myenv** |
 
-Update Miniconda:
-```bash
-conda update --all
-```
+> [!NOTE] <br>
+> The **conda env remove** command deletes the environment's directory and all its contents. <br>
+> In some cases, you may encounter a corrupted Conda environment that cannot be removed using the standard conda env remove command. In such cases, you can manually delete the environment by removing its directory from the envs folder in your Conda installation. <br>
+>
 
-Create a virtual environment for your project:
-```bash
-conda create --name myenv
-```
-(replace myenv with the environment name)
-<br>
-
-To create an environment with a specific version of Python:
-```bash
-conda create --name myenv python=3.9
-```
-<br>
-
-To create an environment with a specific package:
-```bash
-conda create -n myenv scipy
-```
-<br>
-
-To create an enviroment with a specific version of Python and add a specific package:
-```bash
-conda create -n myenv python
-conda install -n myenv scipy
-```
-<br>
-
-To create an environment with a specific version of Python and multiple packages:
-```bash
-conda create -n myenv python=3.9 scipy=0.17.3 astroid babel
-```
-To make a silent installation:
-```bash
-conda create -n myenv python=3.9 -y
-```
-<br>
-
-Activate the virtual environment:
-```bash
-conda activate myenv
-```
-<br>
-
-After activation the prompt change into:
-```
-(myenv) username@vm1:~$
-```
-<br>
-
-To deactivate an active environment, use:
-```bash
-conda deactivate myenv
-```
-<br>
-
-To remove a deactivated environment:
-```bash
-conda env remove --name myenv
-```
-<br>
-
-The **conda env remove** command deletes the environment's directory and all its contents. <br>
-In some cases, you may encounter a corrupted Conda environment that cannot be removed using the standard conda env remove command. In such cases, you can manually delete the environment by removing its directory from the envs folder in your Conda installation. <br>
-
-To exit/deactivate the virtual environment:
-```bash
-conda deactivate
-```
-<br>
-
-To list all the Conda environments:
-```bash
-conda env list
-```
-<br>
-
-List linked packages in a conda environment:
-```bash
-conda list
-```
-<br>
-
-If the environment is not activated, to see a list of all packages installed in a specific environment:
-```bash
-conda list -n myenv
-```
-<br>
 
 - As best practice, in an <ins>activated environment</ins>, regularly update your packages using: **conda update --all** <br>
 - Use conda environments for isolation; create a conda environment to isolate any changes pip makes.
