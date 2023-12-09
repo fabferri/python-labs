@@ -16,11 +16,29 @@ editor=""/>
    ms.author="fabferri" />
 
 # Azure Ubuntu VM dev tools, Python and packages
+The full deployment of the Azure Ubuntu VM can be done in steps:
+1. Copy the bash scripts **create-vm.sh**, **dev.sh** to the Azure Cloud Shell storagedriver
+2. Inside the Cloud Shell run the script **create-vm.sh**; this spins up the Ubuntu VM
+3. Inside the CloudShell run the command **az vm run-command invoke** referencing the script **dev.sh**. The bash script **dev.sh** install: 
+   - xrdp service to connect to the VM in RDP 
+   - Ubuntu desktop 
+   - Visual Studio Code
+   - Chrome web browser
+   - Python 
+   - Visual Studio Code Python extension
+   - Visual Studio Code Jupyter notebook extension
+   - Python virtual environment package
+   - Miniconda
+   <br>
+   At the end, you will be able to connect to the Ubuntu in RDP.
+4. Follow the discussion in this article to install Python packages by Miniconda in virtual environment.
+
+## <a name="Spinning up the Azure Ubuntu VM"></a>1. Spinning up the Azure Ubuntu VM 
 In the Azure management portal open the Azure Cloud Shell:
 
 [![1]][1]
 
-Using the button on the Cloud Shell menu, copy local files **create-vm.sh**, **dev.sh** to a Cloud Shell driver: 
+Using the button on the Cloud Shell menu, copy local files **create-vm.sh**, **dev.sh** to a Cloud Shell storagedriver: 
 
 [![2]][2]
 
@@ -76,7 +94,7 @@ Check if there is any error in the files:
 /var/lib/waagent/run-command/download/0/stderr
 ```
 
-## <a name="virtual environment"></a>1. Install PyCharm Community Edition
+## <a name="PyCharm Community Edition"></a>2. Install PyCharm Community Edition
 
 PyCharm Community Edition is a free version of PyCharm <br>
 Requirements: 
@@ -115,7 +133,7 @@ StartupNotify=true
 EOF
 ```
 
-## <a name="virtual environment"></a>2. Virtual environments for Python with conda
+## <a name="virtual environment"></a>3. Virtual environments for Python with conda
 virtual environment is a named, isolated, working copy of Python that that maintains its own files, directories, and paths so that you can work with specific versions of libraries or Python itself without affecting other Python projects. Virtual environments make it easy to cleanly separate different projects and avoid problems with different dependencies and version requirements across components. The conda command is the preferred interface for managing installations and virtual environments with the Anaconda Python distribution. <br>
 
 Check conda version:
@@ -228,7 +246,7 @@ conda list -n myenv
   pip install --upgrade pip
 ```
 
-## <a name="Install Tensorflow"></a>3. Install Tensorflow in the virtual environment
+## <a name="Install Tensorflow"></a>4. Install Tensorflow in the virtual environment
 Create a virtual environment and install tensorflow:
 ```bash
 conda create -n myenv tensorflow
@@ -246,7 +264,7 @@ python -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 
 ```
 
 
-## <a name="Install PyTorch"></a>4. Install PyTorch in the virtual environment
+## <a name="Install PyTorch"></a>5. Install PyTorch in the virtual environment
 Inside the virtual environment install from PyTorch channel:
 ```bash
 conda update --all
@@ -263,7 +281,7 @@ print(torch.__version__)
 ```
 <br>
 
-## <a name="virtual environment"></a>5. Install Pandas in the virtual environment
+## <a name="Pandas"></a>6. Install Pandas in the virtual environment
 ```bash
 conda install pandas
 ```
@@ -272,7 +290,7 @@ OR to make silent installations:
 conda install -y pandas
 ```
 
-## <a name="virtual environment"></a>6. Install Matplotlib in the virtual environment
+## <a name="Matplotlib"></a>7. Install Matplotlib in the virtual environment
 Inside the virtual enviroment, install Matplotlib. Matplotlib is available both via the anaconda main channel:
 ```bash
 conda install matplotlib
@@ -282,7 +300,7 @@ or via the conda-forge community channel:
 conda install -c conda-forge matplotlib
 ```
 
-## <a name="Python version"></a>7. Python version installed out of virtual environment
+## <a name="Python version"></a>8. Python version installed out of virtual environment
 The bash script **dev.sh** installed in the Ubuntu 22.04 the following release:
 ```bash
 python --version
