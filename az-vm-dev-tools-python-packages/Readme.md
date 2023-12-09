@@ -293,6 +293,7 @@ Python 3.11.5
 `date: 06-12-23` <br>
 
 <!--Image References-->
-
+[1]: ./media/cloud-shell.png "start Cloud Shell"
+[2]: ./media/copying-files.png "copying local files to the Cloud Shell storage account"
 
 <!--Link References-->
