@@ -29,7 +29,6 @@ The full deployment of the Azure Ubuntu VM can be done in steps:
    - Visual Studio Code Jupyter notebook extension
    - Python virtual environment package
    - Miniconda
-   <br>
    At the end, you will be able to connect to the Ubuntu in RDP.
 4. Follow the discussion in this article to install Python packages by Miniconda in virtual environment.
 
