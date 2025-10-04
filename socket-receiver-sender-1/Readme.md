@@ -20,6 +20,7 @@ editor=""/>
 `async_tcp_server.py`: it is the receiver <br>
 `async_tcp_client.py`: it is the sender <br>
 
+
 <br>
 
 **async_tcp_server.py** <br>
@@ -30,6 +31,12 @@ This asynchronous TCP server handles multiple client connections using asyncio, 
 **async_tcp_client.py** <br>
 This Python script uses asyncio to simulate multiple parallel TCP client connections to a server. Each client sends batches of messages with optional encoding, handles connection errors gracefully, and includes configurable parameters for host, port, number of connections, and message batches. It demonstrates asynchronous communication, error handling, and controlled message flow using delays.
 
+variables in `async_tcp_client.py`: <br>
+HOST = '127.0.0.1'             # keep this value if client and server run both on the same VM
+PORT = 33388                   # listen port on the server
+ENCODE_MESSAGES = False        # Set to False to send messages without encoding utf-8
+NUM_CONNECTIONS = 5            # Number of parallel connections to create
+MESSAGES_PER_CONNECTION = 100  # Number of message batches per connection
 
 `Tags: Python, Visual Studio Code` <br>
 `date: 04-10-25` <br>
