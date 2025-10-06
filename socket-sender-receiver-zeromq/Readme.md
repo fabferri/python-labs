@@ -17,7 +17,7 @@ editor=""/>
 
 # ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern
 
-> **✅ Pure ZeroMQ Implementation**: This project demonstrates a production-ready **ZeroMQ-only** messaging system with no standard Python socket library dependencies.
+> **Pure ZeroMQ Implementation**: this project demonstrates a production-ready **ZeroMQ-only** messaging system with no standard Python socket library dependencies.
 
 ## 📋 Table of Contents
 
@@ -34,7 +34,8 @@ editor=""/>
 - [🔧 Troubleshooting](#troubleshooting)
 - [📚 Advanced Usage](#advanced-usage)
 
-## 🎯 Project Overview {#project-overview}
+<a id="project-overview"></a>
+## 🎯 Project Overview
 
 **Files:**
 - `async-socket-receiver.py` - ZeroMQ PULL socket server with advanced logging
@@ -44,7 +45,8 @@ editor=""/>
 
 **Architecture Pattern:** Producer-Consumer with load balancing using ZeroMQ PUSH/PULL sockets
 
-## ⚡ Key Features {#key-features}
+<a id="key-features"></a>
+## ⚡ Key Features
 
 ### 🔄 **Core ZeroMQ Features**
 - ✅ **Pure ZeroMQ API** - No standard socket library dependencies
@@ -73,7 +75,8 @@ editor=""/>
 - ✅ **Resource Management** - Active socket tracking and cleanup
 
 
-## 📊 Performance Metrics {#performance-metrics}
+<a id="performance-metrics"></a>
+## 📊 Performance Metrics
 
 ### **Throughput Capabilities**
 | Configuration | Workers | Messages/Worker | Total Messages | Avg. Throughput |
@@ -93,9 +96,11 @@ editor=""/>
 - **Network Latency**: Depends on TCP stack (typically < 1ms locally)
 - **Queue Operations**: Thread-safe, non-blocking
 
-## 🏗️ Architecture {#architecture}
+<a id="architecture"></a>
+## 🏗️ Architecture
 
-## 1. ZeroMQ PULL Server Implementation (async-socket-receiver.py) {#zeromq-pull-server}
+<a id="zeromq-pull-server"></a>
+## 1. ZeroMQ PULL Server Implementation (async-socket-receiver.py)
 
 The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with advanced error handling and message queuing capabilities.
 
@@ -149,7 +154,8 @@ The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with a
 4. ⚙️ Processor thread handles messages independently
 5. 📝 All operations are logged for monitoring and debugging
 
-## 2. ZeroMQ PUSH Client Implementation (async-socket-sender.py) {#zeromq-push-client}
+<a id="zeromq-push-client"></a>
+## 2. ZeroMQ PUSH Client Implementation (async-socket-sender.py)
 
 The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH client** with comprehensive error handling, server monitoring, and graceful shutdown capabilities.
 
@@ -256,6 +262,7 @@ The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH cl
 - 🧹 **Resource Cleanup**: Detailed cleanup progress tracking
 - 📝 **Shutdown Reason**: Clear shutdown cause reporting
 
+<a id="why-pure-zeromq-implementation"></a>
 ## **Why Pure ZeroMQ Implementation?**
 
 ### 🎆 **Advantages over Standard Socket API:**
@@ -274,6 +281,7 @@ The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH cl
 - 🛡️ **Fault Tolerance**: Built-in connection management and recovery
 - 🔗 **No Broker Required**: Direct peer-to-peer communication
 
+<a id="requirements--installation"></a>
 ## **Requirements & Installation**
 
 Create a python virtual enviroment and then use one of following commands:
@@ -292,6 +300,7 @@ pip install -r requirements.txt
 - `threading` - For multi-threaded operations
 - `logging` - For structured logging and monitoring
 
+<a id="quick-start"></a>
 ## **Quick Start**
 
 1. **Start the receiver (server)**:
@@ -325,7 +334,8 @@ pip install -r requirements.txt
 - **Column alignment**: Perfect vertical alignment
 - **Optional file output**: `server_logs.txt` when enabled
 
-## ⚙️ Configuration {#configuration}
+<a id="configuration"></a>
+## ⚙️ Configuration
 
 ### **Server Configuration (async-socket-receiver.py)**
 
@@ -369,7 +379,8 @@ MESSAGE_DELAY = 2.0        # Deliberate pacing
 SERVER_TIMEOUT = 10.0      # Longer timeouts
 ```
 
-## 🔧 Troubleshooting {#troubleshooting}
+<a id="troubleshooting"></a>
+## 🔧 Troubleshooting
 
 ### **Common Issues & Solutions**
 
@@ -409,7 +420,8 @@ To enable verbose logging, modify the logging level:
 logging.basicConfig(level=logging.DEBUG)  # More detailed output
 ```
 
-## 📚 Advanced Usage {#advanced-usage}
+<a id="advanced-usage"></a>
+## 📚 Advanced Usage
 
 ### **Custom Message Formats**
 Modify the message format in `send_message_with_retry()`:
