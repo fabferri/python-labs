@@ -20,16 +20,21 @@ editor=""/>
 > **✅ Pure ZeroMQ Implementation**: This project demonstrates a production-ready **ZeroMQ-only** messaging system with no standard Python socket library dependencies.
 
 ## 📋 Table of Contents
+
 - [🎯 Project Overview](#project-overview)
-- [⚡ Key Features](#key-features) 
-- [🏗️ Architecture](#architecture)
+- [⚡ Key Features](#key-features)
 - [📊 Performance Metrics](#performance-metrics)
+- [🏗️ Architecture](#architecture)
+  - [ZeroMQ PULL Server](#zeromq-pull-server)
+  - [ZeroMQ PUSH Client](#zeromq-push-client)
+- [Why Pure ZeroMQ?](#why-pure-zeromq-implementation)
+- [Requirements & Installation](#requirements--installation)
 - [🚀 Quick Start](#quick-start)
 - [⚙️ Configuration](#configuration)
 - [🔧 Troubleshooting](#troubleshooting)
 - [📚 Advanced Usage](#advanced-usage)
 
-## 🎯 Project Overview
+## 🎯 Project Overview {#project-overview}
 
 **Files:**
 - `async-socket-receiver.py` - ZeroMQ PULL socket server with advanced logging
@@ -39,7 +44,7 @@ editor=""/>
 
 **Architecture Pattern:** Producer-Consumer with load balancing using ZeroMQ PUSH/PULL sockets
 
-## ⚡ Key Features
+## ⚡ Key Features {#key-features}
 
 ### 🔄 **Core ZeroMQ Features**
 - ✅ **Pure ZeroMQ API** - No standard socket library dependencies
@@ -68,7 +73,7 @@ editor=""/>
 - ✅ **Resource Management** - Active socket tracking and cleanup
 
 
-## 📊 Performance Metrics
+## 📊 Performance Metrics {#performance-metrics}
 
 ### **Throughput Capabilities**
 | Configuration | Workers | Messages/Worker | Total Messages | Avg. Throughput |
@@ -88,9 +93,9 @@ editor=""/>
 - **Network Latency**: Depends on TCP stack (typically < 1ms locally)
 - **Queue Operations**: Thread-safe, non-blocking
 
-## 🏗️ Architecture
+## 🏗️ Architecture {#architecture}
 
-## <a name="async receiver"></a>1. ZeroMQ PULL Server Implementation (async-socket-receiver.py)
+## 1. ZeroMQ PULL Server Implementation (async-socket-receiver.py) {#zeromq-pull-server}
 
 The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with advanced error handling and message queuing capabilities.
 
@@ -144,7 +149,7 @@ The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with a
 4. ⚙️ Processor thread handles messages independently
 5. 📝 All operations are logged for monitoring and debugging
 
-### <a name="async sender"></a>2. ZeroMQ PUSH Client Implementation (async-socket-sender.py)
+## 2. ZeroMQ PUSH Client Implementation (async-socket-sender.py) {#zeromq-push-client}
 
 The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH client** with comprehensive error handling, server monitoring, and graceful shutdown capabilities.
 
@@ -320,7 +325,7 @@ pip install -r requirements.txt
 - **Column alignment**: Perfect vertical alignment
 - **Optional file output**: `server_logs.txt` when enabled
 
-## ⚙️ Configuration
+## ⚙️ Configuration {#configuration}
 
 ### **Server Configuration (async-socket-receiver.py)**
 
@@ -364,7 +369,7 @@ MESSAGE_DELAY = 2.0        # Deliberate pacing
 SERVER_TIMEOUT = 10.0      # Longer timeouts
 ```
 
-## 🔧 Troubleshooting
+## 🔧 Troubleshooting {#troubleshooting}
 
 ### **Common Issues & Solutions**
 
@@ -404,7 +409,7 @@ To enable verbose logging, modify the logging level:
 logging.basicConfig(level=logging.DEBUG)  # More detailed output
 ```
 
-## 📚 Advanced Usage
+## 📚 Advanced Usage {#advanced-usage}
 
 ### **Custom Message Formats**
 Modify the message format in `send_message_with_retry()`:
