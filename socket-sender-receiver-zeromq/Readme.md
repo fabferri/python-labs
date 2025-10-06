@@ -431,12 +431,6 @@ ZeroMQ PUSH/PULL automatically load balances. To verify:
 2. Start multiple clients
 3. Observe message distribution in server logs
 
-### **Production Deployment Tips**
-- Use process managers (systemd, supervisor)
-- Monitor with external tools (Prometheus, Grafana)
-- Implement log rotation for file logging
-- Consider using ZeroMQ's built-in security features for production
-
 ---
 
 
