@@ -15,7 +15,7 @@ editor=""/>
    ms.date="05/10/2025"
    ms.author="fabferri" />
 
-# 🚀 ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern
+# ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern
 
 > **✅ Pure ZeroMQ Implementation**: This project demonstrates a production-ready **ZeroMQ-only** messaging system with no standard Python socket library dependencies.
 
@@ -439,25 +439,14 @@ ZeroMQ PUSH/PULL automatically load balances. To verify:
 
 ---
 
-## 📈 Version History
-- **v1.0** - Initial ZeroMQ PUSH/PULL implementation
-- **v1.1** - Added real client identification (PID/TID)
-- **v1.2** - Enhanced logging with file output and alignment
-- **v1.3** - Optimized shutdown to prevent hanging
-- **v1.4** - Added performance metrics and troubleshooting guide
-
-## 🤝 Contributing
-- Report issues on GitHub
-- Submit pull requests for improvements
-- Share performance benchmarks
 
 ## 📄 License
 MIT License - See LICENSE file for details
 
 ---
 
-`Tags: Python, ZeroMQ, PyZMQ, PUSH/PULL, Messaging, Multi-threading, Logging, Process-ID, Thread-ID, Performance, Production-Ready` <br>
-`Last Updated: 06-10-25 | Enhanced with performance metrics, troubleshooting guide, and advanced usage patterns` <br>
+`Tags: Python, ZeroMQ, PyZMQ, PUSH/PULL, Messaging, Multi-threading, Process-ID, Thread-ID` <br>
+`date: 06-10-25` <br>
 
 <!--Image References-->
 
