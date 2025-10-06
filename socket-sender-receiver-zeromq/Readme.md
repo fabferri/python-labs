@@ -15,15 +15,46 @@ editor=""/>
    ms.date="05/10/2025"
    ms.author="fabferri" />
 
-# Socket-based messaging in Python using ZeroMQ library: sender and receiver
+# Pure ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern
 
-`async-socket-receiver.py`: it is the PULL socket (receiver) <br>
-`async-socket-sender.py`: it is the PUSH socket (sender) <br>
+> **✅ Pure ZeroMQ Implementation**: This project uses **only ZeroMQ API** - no standard Python socket library usage whatsoever.
+
+`async-socket-receiver.py`: ZeroMQ PULL socket (receiver) - **Pure ZeroMQ API** <br>
+`async-socket-sender.py`: ZeroMQ PUSH socket (sender) - **Pure ZeroMQ API** <br>
+
+## Key ZeroMQ Features Implemented
+
+✅ **Pure ZeroMQ Context Management**: `zmq.Context()` creation and proper termination  
+✅ **ZeroMQ PUSH/PULL Pattern**: Optimal load-balancing message distribution  
+✅ **Non-blocking Operations**: `zmq.NOBLOCK` and polling for responsiveness  
+✅ **ZeroMQ Error Handling**: `zmq.Again`, `zmq.ZMQError` exception management  
+✅ **ZeroMQ Socket Options**: `zmq.LINGER`, `zmq.SNDTIMEO`, `zmq.RCVTIMEO` configuration  
+✅ **Graceful Resource Cleanup**: Proper socket and context termination  
+✅ **Thread-safe ZeroMQ Operations**: Thread-safe socket management with locks  
+✅ **Real Client Identification**: Process ID and Thread ID tracking instead of simulated ports  
+✅ **Advanced Logging System**: Optional file logging with custom timestamp formatting  
+✅ **Aligned Log Output**: Column-aligned logs for better readability and monitoring  
+✅ **Fast Shutdown**: Optimized cleanup to prevent client hanging issues
 
 
-## <a name="async receiver"></a>1. description async-socket-receiver.py
+## <a name="async receiver"></a>1. ZeroMQ PULL Server Implementation (async-socket-receiver.py)
 
-The **async-socket-receiver.py** implements a ZeroMQ PULL server with error handling and message queuing capabilities.
+The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with advanced error handling and message queuing capabilities.
+
+### **Pure ZeroMQ API Usage:**
+- **No standard socket imports** - Uses only `zmq` library
+- **ZeroMQ Context**: `zmq.Context()` for resource management
+- **PULL Socket**: `context.socket(zmq.PULL)` for message reception
+- **ZeroMQ Methods**: `socket.bind()`, `socket.recv_string()`, `socket.poll()`
+- **ZeroMQ Options**: `zmq.LINGER`, `zmq.RCVTIMEO`, `zmq.LAST_ENDPOINT`
+- **ZeroMQ Exceptions**: `zmq.Again`, `zmq.ZMQError` handling
+
+### **Advanced Logging Features:**
+- **Dual Logging**: Console + optional file logging (`ENABLE_FILE_LOGGING = True/False`)
+- **Custom Timestamp**: 2-decimal precision timestamps (e.g., `2025-10-06 13:08:22.15`)
+- **Client Identification**: Real Process ID and Thread ID tracking
+- **Aligned Output**: Column-aligned logs for better readability
+- **Message Tracking**: Sequential message numbering with client details
 
 **Architecture Overview:** <br>
 
@@ -59,9 +90,24 @@ The **async-socket-receiver.py** implements a ZeroMQ PULL server with error hand
 4. Processor thread handles messages independently
 5. All operations are logged for monitoring and debugging
 
-### <a name="async sender"></a>2. description async-socket-sender.py
+### <a name="async sender"></a>2. ZeroMQ PUSH Client Implementation (async-socket-sender.py)
 
-The **async-socket-sender.py** implements a multi-threaded ZeroMQ PUSH client with comprehensive error handling, server monitoring, and graceful shutdown capabilities.
+The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH client** with comprehensive error handling, server monitoring, and graceful shutdown capabilities.
+
+### **Pure ZeroMQ API Usage:**
+- **No standard socket imports** - Uses only `zmq` library
+- **ZeroMQ Context**: `zmq.Context()` for connection management
+- **PUSH Socket**: `context.socket(zmq.PUSH)` for message sending
+- **ZeroMQ Methods**: `socket.connect()`, `socket.send_string()`, `socket.close()`
+- **ZeroMQ Options**: `zmq.LINGER`, `zmq.SNDTIMEO` for timeout control
+- **ZeroMQ Exceptions**: `zmq.Again`, `zmq.ZMQError` for robust error handling
+
+### **Client Identification System:**
+- **Real Process ID**: Uses `os.getpid()` for actual process identification
+- **Thread ID Tracking**: Uses `threading.get_ident()` for thread-specific identification
+- **Enhanced Message Format**: `ClientID[PID:xxxx/TID:yyyy] - Task N`
+- **No Simulation**: Replaced simulated ports with real client identifiers
+- **Unique Tracking**: Each client thread has a unique PID/TID combination
 
 **Architecture Overview:** <br>
 
@@ -141,15 +187,96 @@ The **async-socket-sender.py** implements a multi-threaded ZeroMQ PUSH client wi
 - **Standard Load**: `NUM_WORKERS = 20, MESSAGES_PER_WORKER = 10, MESSAGE_DELAY = 0.5`
 - **High Throughput**: `NUM_WORKERS = 50, MESSAGES_PER_WORKER = 100, MESSAGE_DELAY = 0.1`
 
-**Logging Features:**
-- Structured logging with timestamps and severity levels
-- Per-thread identification for debugging
-- Server monitoring status updates
-- Resource cleanup progress tracking
-- Shutdown reason reporting
- 
-`Tags: Python, Visual Studio Code` <br>
-`date: 05-10-25` <br>
+**Enhanced Logging Features:**
+- **Custom Timestamp Format**: 2-decimal precision (e.g., `13:08:22.15`)
+- **Column-Aligned Output**: Perfectly aligned logs for easy scanning
+- **Real Client Tracking**: Process ID and Thread ID instead of simulated ports
+- **Dual Output Options**: Console + optional file logging (`server_logs.txt`)
+- **Per-thread Identification**: Unique thread identification for debugging
+- **Server Monitoring**: Real-time server health status updates
+- **Resource Cleanup**: Detailed cleanup progress tracking
+- **Shutdown Reason**: Clear shutdown cause reporting
+
+## **Why Pure ZeroMQ Implementation?**
+
+### **Advantages over Standard Socket API:**
+
+- **Higher Performance**: Built-in message queuing and optimized transport
+- **Automatic Load Balancing**: PUSH/PULL pattern distributes messages automatically
+- **Better Error Handling**: ZeroMQ-specific exceptions and timeout management
+- **Simplified Code**: High-level messaging patterns vs. low-level socket operations
+- **Message Integrity**: Built-in message framing and delivery guarantees
+- **Protocol Agnostic**: Easy switching between TCP, IPC, inproc transports
+
+### **ZeroMQ PUSH/PULL Pattern Benefits:**
+
+- **Load Distribution**: Messages automatically distributed across available workers
+- **Scalability**: Easy to add more senders or receivers
+- **Fault Tolerance**: Built-in connection management and recovery
+- **No Broker Required**: Direct peer-to-peer communication
+
+## **Requirements & Installation**
+
+Create a python virtual enviroment and then use one of following commands:
+
+```bash
+# Install ZeroMQ Python bindings
+pip install pyzmq
+
+# Or install from requirements.txt
+pip install -r requirements.txt
+```
+
+**Dependencies:**
+
+- `pyzmq` - Pure ZeroMQ Python bindings (no standard socket usage)
+- `threading` - For multi-threaded operations
+- `logging` - For structured logging and monitoring
+
+## **Quick Start**
+
+1. **Start the receiver (server)**:
+
+   ```bash
+   python async-socket-receiver.py
+   ```
+
+2. **Start the sender (client)**:
+
+   ```bash
+   python async-socket-sender.py
+   ```
+
+3. **Monitor the logs** to see ZeroMQ message exchange in action!
+
+### **Sample Log Output:**
+
+**Server Logs** (with aligned columns):
+
+```
+2025-10-06 13:08:22.15 - INFO - [MSG #081] ZMQ [Pusher-1    ] -> [Server:*:5560] | Task  4 | Pusher-1[PID:32304/TID:8956] - Task 4
+2025-10-06 13:08:22.25 - INFO - [PROC] Server:5560 | Pusher-1    | Task  4 | Processing: Pusher-1[PID:32304/TID:8956] - Task 4
+2025-10-06 13:08:22.35 - INFO - [MSG #082] ZMQ [Pusher-10   ] -> [Server:*:5560] | Task  4 | Pusher-10[PID:32304/TID:19348] - Task 4
+```
+
+**Key Log Features:**
+
+- **2-decimal timestamps**: `13:08:22.15` format
+- **Real client IDs**: `PID:32304/TID:8956`
+- **Column alignment**: Perfect vertical alignment
+- **Optional file output**: `server_logs.txt` when enabled
+
+### **Server Configuration:**
+
+To **enable/disable file logging**, edit `async-socket-receiver.py`:
+
+```python
+ENABLE_FILE_LOGGING = True   # Creates server_logs.txt
+ENABLE_FILE_LOGGING = False  # Console only
+```
+
+`Tags: Python, ZeroMQ, PyZMQ, PUSH/PULL, Messaging, Logging, Process-ID, Thread-ID, Visual Studio Code` <br>
+`date: 06-10-25` <br>
 
 <!--Image References-->
 

@@ -5,6 +5,7 @@ import time
 import logging
 import sys
 import signal
+import os
 
 def setup_logging():
     """Setup logging configuration"""
@@ -38,7 +39,7 @@ def init_global_variables():
 def setup_socket(context, identity):
     """Setup and configure a ZMQ socket"""
     socket = context.socket(zmq.PUSH)
-    socket.setsockopt(zmq.LINGER, 1000)  # Set linger time to 1 second
+    socket.setsockopt(zmq.LINGER, 100)  # Reduced linger time to 100ms to prevent hanging
     socket.setsockopt(zmq.SNDTIMEO, int(SERVER_TIMEOUT * 1000))  # Set send timeout
     
     # Register socket for cleanup
@@ -90,7 +91,10 @@ def send_message_with_retry(socket, identity, message_id):
             return False, "shutdown_or_server_unavailable"
             
         try:
-            message = f"{identity} - Task {message_id}"
+            # Include process ID and thread ID for better client identification
+            pid = os.getpid()
+            tid = threading.get_ident()
+            message = f"{identity}[PID:{pid}/TID:{tid}] - Task {message_id}"
             
             # Send with timeout detection
             start_time = time.time()
@@ -144,9 +148,11 @@ def cleanup_socket(socket, identity):
     """Clean up socket resources"""
     if socket:
         try:
-            # Close socket first
+            # Set linger to 0 for immediate close
+            socket.setsockopt(zmq.LINGER, 0)
+            # Close socket immediately
             socket.close()
-            logging.debug(f"{identity} socket closed")
+            logging.debug(f"{identity} socket closed immediately")
             
             # Then remove from active list
             with socket_lock:
@@ -258,7 +264,8 @@ def test_server_connection(context, timeout=5.0):
         test_socket.connect("tcp://localhost:5560")
         
         # Try to send a test message with timeout
-        test_message = "__HEARTBEAT__"
+        pid = os.getpid()
+        test_message = f"__HEARTBEAT__[PID:{pid}]"
         test_socket.send_string(test_message)  # This will timeout if server doesn't respond
         
         logging.debug("Server connection test successful")
@@ -349,9 +356,11 @@ def cleanup_sockets():
             logging.warning(f"Force closing {socket_count} remaining sockets (workers may not have shut down cleanly)")
             for i, socket in enumerate(active_sockets[:]):
                 try:
+                    # Force immediate closure
+                    socket.setsockopt(zmq.LINGER, 0)
                     socket.close()
                     active_sockets.remove(socket)
-                    logging.debug(f"Socket {i+1}/{socket_count} force closed")
+                    logging.debug(f"Socket {i+1}/{socket_count} force closed immediately")
                 except Exception as e:
                     logging.error(f"Error force closing socket {i+1}: {e}")
             logging.info(f"Completed force closing {socket_count} sockets")
@@ -404,7 +413,7 @@ def create_worker_threads(context):
 
 def wait_for_threads(threads):
     """Wait for all threads to finish with per-thread timeout"""
-    per_thread_timeout = 5.0  # Reasonable timeout for 10 messages per worker
+    per_thread_timeout = 2.0  # Reduced timeout to prevent hanging
     alive_threads = []
     
     for t in threads:
@@ -445,8 +454,8 @@ def log_shutdown_reason():
     if shutdown_event.is_set():
         reason = "server unavailable" if not server_available.is_set() else "user request"
         logging.info(f"Shutdown initiated due to {reason} - waiting for threads to complete...")
-        # Give threads additional time to finish their cleanup in finally blocks
-        time.sleep(1.5)  # Increased to allow proper socket cleanup
+        # Brief pause to allow socket cleanup without hanging
+        time.sleep(0.3)  # Reduced to prevent hanging
     else:
         logging.info("All threads completed normally")
 
@@ -454,8 +463,9 @@ def cleanup_context(context):
     """Clean up ZMQ context"""
     if context:
         try:
+            # Force immediate termination without waiting for pending messages
             context.term()
-            logging.info("ZMQ Context terminated gracefully")
+            logging.info("ZMQ Context terminated immediately")
         except Exception as e:
             logging.error(f"Error terminating context: {e}")
 
