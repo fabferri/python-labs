@@ -740,13 +740,8 @@ logger.error(f'Failed to connect: {e}')
 - `aiohttp` - Async HTTP client/server for Python
 
 
-
-
-
-
-## License
-
-This project is open source and available under the MIT License.
+## 📄 License
+MIT License - See [LICENSE](../LICENSE) file for details
 
 ---
 
