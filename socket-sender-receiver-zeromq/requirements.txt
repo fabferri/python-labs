@@ -1,1 +1,5 @@
-pyzmq
+pyzmq>=25.0.0
+# Unit testing dependencies (built into Python, no additional packages needed)
+# Additional testing utilities for advanced scenarios
+pytest>=7.0.0  # Optional: For enhanced testing features
+pytest-timeout>=2.1.0  # Optional: For test timeout management

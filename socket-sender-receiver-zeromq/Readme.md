@@ -30,6 +30,7 @@ editor=""/>
 - [Why Pure ZeroMQ?](#why-pure-zeromq-implementation)
 - [Requirements & Installation](#requirements--installation)
 - [Quick Start](#quick-start)
+- [Testing](#testing)
 - [Configuration](#configuration)
 - [Troubleshooting](#troubleshooting)
 - [Advanced Usage](#advanced-usage)
@@ -40,6 +41,8 @@ editor=""/>
 **Files:**
 - `async-socket-receiver.py` - ZeroMQ PULL socket server with advanced logging
 - `async-socket-sender.py` - Multi-threaded ZeroMQ PUSH client with monitoring
+- `test_zeromq_messaging.py` - Comprehensive unit tests for all scenarios
+- `run_tests.py` - Test runner script with detailed reporting
 - `requirements.txt` - Python dependencies (PyZMQ)
 - `server_logs.txt` - Optional server log file output
 
@@ -334,8 +337,58 @@ pip install -r requirements.txt
 - **Column alignment**: Perfect vertical alignment
 - **Optional file output**: `server_logs.txt` when enabled
 
+<a id="testing"></a>
+## Testing
+
+The project includes comprehensive unit tests that validate the system behavior under different load scenarios.
+
+### **Quick Test Run**
+
+```bash
+# Run all tests (recommended)
+python run_tests.py
+```
+
+Expected output:
+```
+ZeroMQ Messaging System Test Runner
+==================================================
+ZeroMQ version: 4.3.5
+PyZMQ version: 27.1.0
+
+Running test suite...
+------------------------------
+Test Summary:
+   Tests run: 6
+   Failures: 0
+   Errors: 0
+   Duration: 5.66 seconds
+SUCCESS: All tests passed!
+```
+
+### **Test Scenarios**
+
+The test suite validates three main scenarios:
+
+1. **Light Testing** (5 workers × 5 messages): Basic functionality validation
+2. **Standard Testing** (10 workers × 8 messages): Load balancing verification
+3. **High Throughput** (15 workers × 10 messages): Performance benchmarking
+
+### **Alternative Test Commands**
+
+```bash
+# Direct test execution
+python test_zeromq_messaging.py
+
+# Verbose unittest output
+python -m unittest test_zeromq_messaging -v
+
+# Run specific test
+python -m unittest test_zeromq_messaging.TestZeroMQMessaging.test_light_testing_scenario
+```
+
 <a id="configuration"></a>
-## ⚙️ Configuration
+## Configuration
 
 ### **Server Configuration (async-socket-receiver.py)**
 
@@ -421,7 +474,51 @@ logging.basicConfig(level=logging.DEBUG)  # More detailed output
 ```
 
 <a id="advanced-usage"></a>
-## 📚 Advanced Usage
+## Advanced Usage
+
+### **Unit Testing**
+
+The project includes comprehensive unit tests to verify behavior under different load scenarios:
+
+```bash
+# Run all tests using the test runner (recommended)
+python run_tests.py
+
+# Or run tests directly
+python test_zeromq_messaging.py
+
+# Run with verbose output
+python -m unittest test_zeromq_messaging -v
+```
+
+**Test Scenarios Covered:**
+
+1. **Light Testing Scenario**:
+   - 5 workers, 5 messages each
+   - Verifies basic functionality and message format
+   - Tests graceful shutdown behavior
+
+2. **Standard Testing Scenario**:
+   - 10 workers, 8 messages each (scaled for testing)
+   - Verifies load balancing across workers
+   - Ensures all workers participate in message sending
+
+3. **High Throughput Scenario**:
+   - 15 workers, 10 messages each (scaled for testing)
+   - Measures message throughput performance
+   - Validates system behavior under concurrent load
+
+4. **Performance and Validation Tests**:
+   - Message format validation using regex patterns
+   - Server shutdown handling verification
+   - Throughput measurement and benchmarking
+
+**Test Features:**
+- Isolated test environment (uses different ports)
+- Automatic server/client lifecycle management
+- Message format validation
+- Performance metrics collection
+- Graceful shutdown testing
 
 ### **Custom Message Formats**
 Modify the message format in `send_message_with_retry()`:
