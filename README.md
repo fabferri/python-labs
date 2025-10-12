@@ -7,7 +7,6 @@
 - [Socket-Based Messaging in Python: sender and receiver](https://github.com/fabferri/python-labs/tree/main/socket-receiver-sender-1)
 - [ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern](https://github.com/fabferri/python-labs/tree/main/socket-sender-receiver-zeromq)
 - [Socket.IO Python Sender/Receiver](https://github.com/fabferri/python-labs/tree/main/socket.io-sender-receiver)
-- 
 - Examples
    - [asyncio examples](https://github.com/fabferri/python-labs/tree/main/examples/asyncio)
    - [blended notes](https://github.com/fabferri/python-labs/tree/main/examples/blended-notes)
