@@ -5,7 +5,9 @@
 - [Create An Azure Ubuntu VM with dev tools (VS code, PyCharm, Miniconda), Python and packages (Pytorch, TensorFlow,Panda, Matplotlib)](https://github.com/fabferri/python-labs/tree/main/az-vm-dev-tools-python-packages) <br>
   The access to the Azure VM can be done by SSH (terminal) and RDP (graphical interface)
 - [Socket-Based Messaging in Python: sender and receiver](https://github.com/fabferri/python-labs/tree/main/socket-receiver-sender-1)
-- [Socket-based messaging in Python using ZeroMQ library: sender and receiver](https://github.com/fabferri/python-labs/tree/main/socket-sender-receiver-zeromq)
+- [ZeroMQ Messaging Implementation in Python: PUSH/PULL Pattern](https://github.com/fabferri/python-labs/tree/main/socket-sender-receiver-zeromq)
+- [Socket.IO Python Sender/Receiver](https://github.com/fabferri/python-labs/tree/main/socket.io-send-receive)
+- 
 - Examples
    - [asyncio examples](https://github.com/fabferri/python-labs/tree/main/examples/asyncio)
    - [blended notes](https://github.com/fabferri/python-labs/tree/main/examples/blended-notes)
