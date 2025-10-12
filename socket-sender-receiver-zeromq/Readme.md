@@ -19,23 +19,23 @@ editor=""/>
 
 > **Pure ZeroMQ Implementation**: this project demonstrates a production-ready **ZeroMQ-only** messaging system with no standard Python socket library dependencies.
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [🎯 Project Overview](#project-overview)
-- [⚡ Key Features](#key-features)
-- [📊 Performance Metrics](#performance-metrics)
-- [🏗️ Architecture](#architecture)
-  - [ZeroMQ PULL Server](#zeromq-pull-server)
-  - [ZeroMQ PUSH Client](#zeromq-push-client)
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Performance Metrics](#performance-metrics)
+- [Architecture](#architecture)
+   - [ZeroMQ PULL Server](#zeromq-pull-server)
+   - [ZeroMQ PUSH Client](#zeromq-push-client)
 - [Why Pure ZeroMQ?](#why-pure-zeromq-implementation)
 - [Requirements & Installation](#requirements--installation)
-- [🚀 Quick Start](#quick-start)
-- [⚙️ Configuration](#configuration)
-- [🔧 Troubleshooting](#troubleshooting)
-- [📚 Advanced Usage](#advanced-usage)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Advanced Usage](#advanced-usage)
 
 <a id="project-overview"></a>
-## 🎯 Project Overview
+## Project Overview
 
 **Files:**
 - `async-socket-receiver.py` - ZeroMQ PULL socket server with advanced logging
@@ -46,37 +46,37 @@ editor=""/>
 **Architecture Pattern:** Producer-Consumer with load balancing using ZeroMQ PUSH/PULL sockets
 
 <a id="key-features"></a>
-## ⚡ Key Features
+## Key Features
 
-### 🔄 **Core ZeroMQ Features**
-- ✅ **Pure ZeroMQ API** - No standard socket library dependencies
-- ✅ **PUSH/PULL Pattern** - Automatic load balancing and message distribution
-- ✅ **Non-blocking I/O** - `zmq.NOBLOCK` and polling for high responsiveness
-- ✅ **Context Management** - Proper `zmq.Context()` lifecycle handling
-- ✅ **Socket Options** - Advanced timeout and linger configurations
+### Core ZeroMQ Features
+- **Pure ZeroMQ API** - No standard socket library dependencies
+- **PUSH/PULL Pattern** - Automatic load balancing and message distribution
+- **Non-blocking I/O** - `zmq.NOBLOCK` and polling for high responsiveness
+- **Context Management** - Proper `zmq.Context()` lifecycle handling
+- **Socket Options** - Advanced timeout and linger configurations
 
-### 🧵 **Multi-threading & Performance**
-- ✅ **Thread-safe Operations** - Concurrent socket management with locks
-- ✅ **Producer-Consumer Pattern** - Separate threads for receiving and processing
-- ✅ **Server Health Monitoring** - Background thread for connection monitoring
-- ✅ **Fast Shutdown** - Optimized cleanup to prevent hanging (< 3 seconds)
+### Multi-threading & Performance
+- **Thread-safe Operations** - Concurrent socket management with locks
+- **Producer-Consumer Pattern** - Separate threads for receiving and processing
+- **Server Health Monitoring** - Background thread for connection monitoring
+- **Fast Shutdown** - Optimized cleanup to prevent hanging (< 3 seconds)
 
-### 📊 **Monitoring & Debugging**
-- ✅ **Real Client Identification** - Process ID and Thread ID tracking
-- ✅ **Advanced Logging** - Dual output (console + optional file)
-- ✅ **Column-Aligned Logs** - Perfect formatting for readability
-- ✅ **Custom Timestamps** - 2-decimal precision (e.g., `13:08:22.15`)
-- ✅ **Message Tracking** - Sequential numbering and client details
+### Monitoring & Debugging
+- **Real Client Identification** - Process ID and Thread ID tracking
+- **Advanced Logging** - Dual output (console + optional file)
+- **Column-Aligned Logs** - Perfect formatting for readability
+- **Custom Timestamps** - 2-decimal precision (e.g., `13:08:22.15`)
+- **Message Tracking** - Sequential numbering and client details
 
-### 🛡️ **Error Handling & Reliability**
-- ✅ **ZeroMQ Exception Management** - `zmq.Again`, `zmq.ZMQError` handling
-- ✅ **Connection Retry Logic** - Configurable retry attempts with backoff
-- ✅ **Graceful Shutdown** - Ctrl+C handling with proper resource cleanup
-- ✅ **Resource Management** - Active socket tracking and cleanup
+### Error Handling & Reliability
+- **ZeroMQ Exception Management** - `zmq.Again`, `zmq.ZMQError` handling
+- **Connection Retry Logic** - Configurable retry attempts with backoff
+- **Graceful Shutdown** - Ctrl+C handling with proper resource cleanup
+- **Resource Management** - Active socket tracking and cleanup
 
 
 <a id="performance-metrics"></a>
-## 📊 Performance Metrics
+## Performance Metrics
 
 ### **Throughput Capabilities**
 | Configuration | Workers | Messages/Worker | Total Messages | Avg. Throughput |
@@ -97,130 +97,130 @@ editor=""/>
 - **Queue Operations**: Thread-safe, non-blocking
 
 <a id="architecture"></a>
-## 🏗️ Architecture
+## Architecture
 
 <a id="zeromq-pull-server"></a>
 ## 1. ZeroMQ PULL Server Implementation (async-socket-receiver.py)
 
 The **async-socket-receiver.py** implements a **pure ZeroMQ PULL server** with advanced error handling and message queuing capabilities.
 
-### 🔧 **Pure ZeroMQ API Usage:**
-- 📚 **No standard socket imports** - Uses only `zmq` library
-- 🏗️ **ZeroMQ Context**: `zmq.Context()` for resource management
-- 📥 **PULL Socket**: `context.socket(zmq.PULL)` for message reception
-- ⚙️ **ZeroMQ Methods**: `socket.bind()`, `socket.recv_string()`, `socket.poll()`
-- 🔧 **ZeroMQ Options**: `zmq.LINGER`, `zmq.RCVTIMEO`, `zmq.LAST_ENDPOINT`
-- ⚠️ **ZeroMQ Exceptions**: `zmq.Again`, `zmq.ZMQError` handling
+### Pure ZeroMQ API Usage:
+- No standard socket imports - Uses only `zmq` library
+- ZeroMQ Context: `zmq.Context()` for resource management
+- PULL Socket: `context.socket(zmq.PULL)` for message reception
+- ZeroMQ Methods: `socket.bind()`, `socket.recv_string()`, `socket.poll()`
+- ZeroMQ Options: `zmq.LINGER`, `zmq.RCVTIMEO`, `zmq.LAST_ENDPOINT`
+- ZeroMQ Exceptions: `zmq.Again`, `zmq.ZMQError` handling
 
-### 📊 **Advanced Logging Features:**
-- 📺 **Dual Logging**: Console + optional file logging (`ENABLE_FILE_LOGGING = True/False`)
-- ⏰ **Custom Timestamp**: 2-decimal precision timestamps (e.g., `2025-10-06 13:08:22.15`)
-- 🆔 **Client Identification**: Real Process ID and Thread ID tracking
-- 📐 **Aligned Output**: Column-aligned logs for better readability
-- 🔢 **Message Tracking**: Sequential message numbering with client details
+### Advanced Logging Features:
+- Dual Logging: Console + optional file logging (`ENABLE_FILE_LOGGING = True/False`)
+- Custom Timestamp: 2-decimal precision timestamps (e.g., `2025-10-06 13:08:22.15`)
+- Client Identification: Real Process ID and Thread ID tracking
+- Aligned Output: Column-aligned logs for better readability
+- Message Tracking: Sequential message numbering with client details
 
-### 🏗️ **Architecture Overview:**
+### Architecture Overview:
 
-- 🧵 **Two-Thread Design**: Uses separate threads for message receiving and message processing to ensure high throughput and responsiveness
-- 📦 **Thread-Safe Queue**: Implements a `queue.Queue()` for safe message passing between the receiver and processor threads
-- ⚡ **Non-Blocking Reception**: Uses `zmq.NOBLOCK` flag to prevent blocking operations and maintain system responsiveness
+- Two-Thread Design: Uses separate threads for message receiving and message processing to ensure high throughput and responsiveness
+- Thread-Safe Queue: Implements a `queue.Queue()` for safe message passing between the receiver and processor threads
+- Non-Blocking Reception: Uses `zmq.NOBLOCK` flag to prevent blocking operations and maintain system responsiveness
 
-### 🔧 **Key Components:**
+### Key Components:
 
-1. 📨 **Receiver Worker Thread (`receiver_worker`)**:
-   - 🌐 Binds to `tcp://*:5560` to accept connections from multiple clients
-   - 🔄 Continuously receives messages using non-blocking mode
-   - 📥 Places received messages into a thread-safe queue
-   - ⚠️ Handles `zmq.Again` exceptions when no messages are available
+1. Receiver Worker Thread (`receiver_worker`):
+   - Binds to `tcp://*:5560` to accept connections from multiple clients
+   - Continuously receives messages using non-blocking mode
+   - Places received messages into a thread-safe queue
+   - Handles `zmq.Again` exceptions when no messages are available
 
-2. ⚙️ **Queue Processor Thread (`queue_processor`)**:
-   - ⏱️ Processes messages from the queue with a 1-second timeout
-   - 🛡️ Handles `queue.Empty` exceptions gracefully
-   - 📝 Logs all processed messages for monitoring
+2. Queue Processor Thread (`queue_processor`):
+   - Processes messages from the queue with a 1-second timeout
+   - Handles `queue.Empty` exceptions gracefully
+   - Logs all processed messages for monitoring
 
-### 🛡️ **Error Handling Features:**
+### Error Handling Features:
 
-- ⚠️ **Exception Handling**: Catches and logs ZMQ-specific and general exceptions
-- 📋 **Structured Logging**: Uses Python's logging module with timestamps and severity levels
-- 🔚 **Graceful Shutdown**: Handles `KeyboardInterrupt` (Ctrl+C) for clean server termination
-- 👻 **Daemon Threads**: Both worker threads are marked as daemon threads for proper cleanup
-- 🔄 **Connection Error Recovery**: Continues operation even if individual message operations fail
+- Exception Handling: Catches and logs ZMQ-specific and general exceptions
+- Structured Logging: Uses Python's logging module with timestamps and severity levels
+- Graceful Shutdown: Handles `KeyboardInterrupt` (Ctrl+C) for clean server termination
+- Daemon Threads: Both worker threads are marked as daemon threads for proper cleanup
+- Connection Error Recovery: Continues operation even if individual message operations fail
 
-### 🔄 **Message Flow:**
+### Message Flow:
 
-1. 🔌 Multiple clients connect using PUSH sockets
-2. 📥 Server receives messages via PULL socket (load-balanced across clients)
-3. 📦 Messages are queued for processing
-4. ⚙️ Processor thread handles messages independently
-5. 📝 All operations are logged for monitoring and debugging
+1. Multiple clients connect using PUSH sockets
+2. Server receives messages via PULL socket (load-balanced across clients)
+3. Messages are queued for processing
+4. Processor thread handles messages independently
+5. All operations are logged for monitoring and debugging
 
 <a id="zeromq-push-client"></a>
 ## 2. ZeroMQ PUSH Client Implementation (async-socket-sender.py)
 
 The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH client** with comprehensive error handling, server monitoring, and graceful shutdown capabilities.
 
-### 🔧 **Pure ZeroMQ API Usage:**
-- 📚 **No standard socket imports** - Uses only `zmq` library
-- 🏗️ **ZeroMQ Context**: `zmq.Context()` for connection management
-- 📤 **PUSH Socket**: `context.socket(zmq.PUSH)` for message sending
-- ⚙️ **ZeroMQ Methods**: `socket.connect()`, `socket.send_string()`, `socket.close()`
-- 🔧 **ZeroMQ Options**: `zmq.LINGER`, `zmq.SNDTIMEO` for timeout control
-- ⚠️ **ZeroMQ Exceptions**: `zmq.Again`, `zmq.ZMQError` for robust error handling
+### Pure ZeroMQ API Usage:
+- No standard socket imports - Uses only `zmq` library
+- ZeroMQ Context: `zmq.Context()` for connection management
+- PUSH Socket: `context.socket(zmq.PUSH)` for message sending
+- ZeroMQ Methods: `socket.connect()`, `socket.send_string()`, `socket.close()`
+- ZeroMQ Options: `zmq.LINGER`, `zmq.SNDTIMEO` for timeout control
+- ZeroMQ Exceptions: `zmq.Again`, `zmq.ZMQError` for robust error handling
 
-### 🆔 **Client Identification System:**
-- 🏷️ **Real Process ID**: Uses `os.getpid()` for actual process identification
-- 🧵 **Thread ID Tracking**: Uses `threading.get_ident()` for thread-specific identification
-- 📝 **Enhanced Message Format**: `ClientID[PID:xxxx/TID:yyyy] - Task N`
-- ❌ **No Simulation**: Replaced simulated ports with real client identifiers
-- 🔍 **Unique Tracking**: Each client thread has a unique PID/TID combination
+### Client Identification System:
+- Real Process ID: Uses `os.getpid()` for actual process identification
+- Thread ID Tracking: Uses `threading.get_ident()` for thread-specific identification
+- Enhanced Message Format: `ClientID[PID:xxxx/TID:yyyy] - Task N`
+- No Simulation: Replaced simulated ports with real client identifiers
+- Unique Tracking: Each client thread has a unique PID/TID combination
 
-### 🏗️ **Architecture Overview:**
+### Architecture Overview:
 
-- 🧩 **Modular Function-Based Design**: Code is organized into well-defined functions for maintainability and testability
-- 🧵 **Multi-Threading**: Uses separate threads for workers and server monitoring
-- 🔚 **Graceful Shutdown**: Implements coordinated shutdown with proper resource cleanup
-- 💓 **Server Health Monitoring**: Background thread monitors server availability
+- Modular Function-Based Design: Code is organized into well-defined functions for maintainability and testability
+- Multi-Threading: Uses separate threads for workers and server monitoring
+- Graceful Shutdown: Implements coordinated shutdown with proper resource cleanup
+- Server Health Monitoring: Background thread monitors server availability
 
-### ⚙️ **Configuration Parameters:**
+### Configuration Parameters:
 
-- 👥 **NUM_WORKERS**: Number of parallel worker threads (default: 20)
-- 📨 **MESSAGES_PER_WORKER**: Messages each worker sends (default: 10)
-- ⏱️ **MESSAGE_DELAY**: Delay between consecutive messages (default: 0.5 seconds)
-- ⏰ **SERVER_TIMEOUT**: Server response timeout (default: 3.0 seconds)
-- 🔄 **CONNECTION_RETRY_ATTEMPTS**: Connection retry attempts (default: 2)
-- 💓 **HEARTBEAT_INTERVAL**: Server monitoring interval (default: 2.0 seconds)
+- NUM_WORKERS: Number of parallel worker threads (default: 20)
+- MESSAGES_PER_WORKER: Messages each worker sends (default: 10)
+- MESSAGE_DELAY: Delay between consecutive messages (default: 0.5 seconds)
+- SERVER_TIMEOUT: Server response timeout (default: 3.0 seconds)
+- CONNECTION_RETRY_ATTEMPTS: Connection retry attempts (default: 2)
+- HEARTBEAT_INTERVAL: Server monitoring interval (default: 2.0 seconds)
 
-### 📚 **Key Function Categories:**
+### Key Function Categories:
 
-**1. 🚀 Initialization Functions:**
-- 📈 `setup_logging()`: Configures logging system
-- ⚙️ `init_global_variables()`: Initializes configuration and threading objects
-- 🚨 `setup_signal_handler()`: Sets up Ctrl+C signal handling
+**1. Initialization Functions:**
+- `setup_logging()`: Configures logging system
+- `init_global_variables()`: Initializes configuration and threading objects
+- `setup_signal_handler()`: Sets up Ctrl+C signal handling
 
-**2. 🔌 Socket Management Functions:**
-- 🔧 `setup_socket(context, identity)`: Creates and configures ZMQ sockets
-- 🌐 `connect_to_server(socket, identity)`: Handles server connection with retries
-- 🧹 `cleanup_socket(socket, identity)`: Cleans up socket resources
+**2. Socket Management Functions:**
+- `setup_socket(context, identity)`: Creates and configures ZMQ sockets
+- `connect_to_server(socket, identity)`: Handles server connection with retries
+- `cleanup_socket(socket, identity)`: Cleans up socket resources
 
-**3. 📨 Message Handling Functions:**
-- 🔄 `send_message_with_retry(socket, identity, message_id)`: Sends messages with error handling and retry logic
-- ⏸️ `interruptible_sleep(duration)`: Implements sleep that can be interrupted by shutdown events
+**3. Message Handling Functions:**
+- `send_message_with_retry(socket, identity, message_id)`: Sends messages with error handling and retry logic
+- `interruptible_sleep(duration)`: Implements sleep that can be interrupted by shutdown events
 
-**4. 👷 Worker and Monitoring Functions:**
-- ⚙️ `push_worker(identity, context)`: Main worker function that sends messages
-- 📈 `log_completion_status(identity)`: Logs worker completion status
-- 💓 `monitor_server_availability()`: Background server health monitoring
-- 🔍 `test_server_connection(context, timeout)`: Tests server responsiveness
+**4. Worker and Monitoring Functions:**
+- `push_worker(identity, context)`: Main worker function that sends messages
+- `log_completion_status(identity)`: Logs worker completion status
+- `monitor_server_availability()`: Background server health monitoring
+- `test_server_connection(context, timeout)`: Tests server responsiveness
 
-**5. 🧵 Thread Management Functions:**
-- 🚀 `create_worker_threads(context)`: Creates and starts worker threads
-- ⏳ `wait_for_threads(threads)`: Waits for threads to complete with timeout
-- ⏹️ `stop_monitoring_thread(monitor_thread)`: Stops server monitoring
+**5. Thread Management Functions:**
+- `create_worker_threads(context)`: Creates and starts worker threads
+- `wait_for_threads(threads)`: Waits for threads to complete with timeout
+- `stop_monitoring_thread(monitor_thread)`: Stops server monitoring
 
-**6. 🏗️ Main Application Functions:**
-- 🔄 `initialize_context()`: Creates ZMQ context and tests server connection
-- 🧹 `cleanup_context(context)`: Cleans up ZMQ context
-- 🎯 `main()`: Main orchestration function
+**6. Main Application Functions:**
+- `initialize_context()`: Creates ZMQ context and tests server connection
+- `cleanup_context(context)`: Cleans up ZMQ context
+- `main()`: Main orchestration function
 
 **Advanced Features:** <br>
 
@@ -247,39 +247,39 @@ The **async-socket-sender.py** implements a multi-threaded **pure ZeroMQ PUSH cl
 - Proper ZMQ context termination
 - Force cleanup of remaining resources
 
-### 📊 **Usage Examples:**
-- 🐌 **Light Testing**: `NUM_WORKERS = 5, MESSAGES_PER_WORKER = 5, MESSAGE_DELAY = 1.0`
-- ⚖️ **Standard Load**: `NUM_WORKERS = 20, MESSAGES_PER_WORKER = 10, MESSAGE_DELAY = 0.5`
-- 🚀 **High Throughput**: `NUM_WORKERS = 50, MESSAGES_PER_WORKER = 100, MESSAGE_DELAY = 0.1`
+### Usage Examples:
+- **Light Testing**: `NUM_WORKERS = 5, MESSAGES_PER_WORKER = 5, MESSAGE_DELAY = 1.0`
+- **Standard Load**: `NUM_WORKERS = 20, MESSAGES_PER_WORKER = 10, MESSAGE_DELAY = 0.5`
+- **High Throughput**: `NUM_WORKERS = 50, MESSAGES_PER_WORKER = 100, MESSAGE_DELAY = 0.1`
 
-### 📈 **Enhanced Logging Features:**
-- ⏰ **Custom Timestamp Format**: 2-decimal precision (e.g., `13:08:22.15`)
-- 📐 **Column-Aligned Output**: Perfectly aligned logs for easy scanning
-- 🆔 **Real Client Tracking**: Process ID and Thread ID instead of simulated ports
-- 📺 **Dual Output Options**: Console + optional file logging (`server_logs.txt`)
-- 🧵 **Per-thread Identification**: Unique thread identification for debugging
-- 💓 **Server Monitoring**: Real-time server health status updates
-- 🧹 **Resource Cleanup**: Detailed cleanup progress tracking
-- 📝 **Shutdown Reason**: Clear shutdown cause reporting
+### Enhanced Logging Features:
+- **Custom Timestamp Format**: 2-decimal precision (e.g., `13:08:22.15`)
+- **Column-Aligned Output**: Perfectly aligned logs for easy scanning
+- **Real Client Tracking**: Process ID and Thread ID instead of simulated ports
+- **Dual Output Options**: Console + optional file logging (`server_logs.txt`)
+- **Per-thread Identification**: Unique thread identification for debugging
+- **Server Monitoring**: Real-time server health status updates
+- **Resource Cleanup**: Detailed cleanup progress tracking
+- **Shutdown Reason**: Clear shutdown cause reporting
 
 <a id="why-pure-zeromq-implementation"></a>
 ## **Why Pure ZeroMQ Implementation?**
 
-### 🎆 **Advantages over Standard Socket API:**
+### Advantages over Standard Socket API:
 
-- 🚀 **Higher Performance**: Built-in message queuing and optimized transport
-- ⚖️ **Automatic Load Balancing**: PUSH/PULL pattern distributes messages automatically
-- 🛡️ **Better Error Handling**: ZeroMQ-specific exceptions and timeout management
-- 🧩 **Simplified Code**: High-level messaging patterns vs. low-level socket operations
-- 📝 **Message Integrity**: Built-in message framing and delivery guarantees
-- 🌐 **Protocol Agnostic**: Easy switching between TCP, IPC, inproc transports
+- **Higher Performance**: Built-in message queuing and optimized transport
+- **Automatic Load Balancing**: PUSH/PULL pattern distributes messages automatically
+- **Better Error Handling**: ZeroMQ-specific exceptions and timeout management
+- **Simplified Code**: High-level messaging patterns vs. low-level socket operations
+- **Message Integrity**: Built-in message framing and delivery guarantees
+- **Protocol Agnostic**: Easy switching between TCP, IPC, inproc transports
 
-### 🔄 **ZeroMQ PUSH/PULL Pattern Benefits:**
+### ZeroMQ PUSH/PULL Pattern Benefits:
 
-- ⚖️ **Load Distribution**: Messages automatically distributed across available workers
-- 📈 **Scalability**: Easy to add more senders or receivers
-- 🛡️ **Fault Tolerance**: Built-in connection management and recovery
-- 🔗 **No Broker Required**: Direct peer-to-peer communication
+- **Load Distribution**: Messages automatically distributed across available workers
+- **Scalability**: Easy to add more senders or receivers
+- **Fault Tolerance**: Built-in connection management and recovery
+- **No Broker Required**: Direct peer-to-peer communication
 
 <a id="requirements--installation"></a>
 ## **Requirements & Installation**
