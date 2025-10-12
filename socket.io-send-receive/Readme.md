@@ -1,6 +1,6 @@
 <properties
-pageTitle= 'Socket.IO Python Sender/Receiver'
-description= "Socket.IO Python Sender/Receiver"
+pageTitle= 'Socket.IO in Python: Sender/Receiver'
+description= "Socket.IO in Python: Sender/Receiver"
 services="Python"
 documentationCenter="https://github.com/fabferri/"
 authors="fabferri"
@@ -15,7 +15,7 @@ editor=""/>
    ms.date="09/10/2025"
    ms.author="fabferri" />
 
-# Socket.IO Python Sender/Receiver
+# Socket.IO in Python: Sender/Receiver
 
 This project demonstrates **Socket.IO** communication in Python with a server (receiver) and client (sender) implementation, featuring **colored terminal output** for enhanced user experience and comprehensive error handling with **automatic reconnection**.
 
