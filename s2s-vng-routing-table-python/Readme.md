@@ -18,8 +18,9 @@ editor="fabferri"/>
 
 # Azure VPN Gateway Routing and Connection by Azure library for Python
 
-A comprehensive Python tool for analyzing Azure Virtual Network Gateway (VPN Gateway) routing information, connections, and BGP peer status. This tool provides detailed information on connection health, BGP peer status, and route exchange in clean, readable tabular format. <br>
-This tool is built using the Azure SDK for Python and provides professional-grade network analysis capabilities.
+A Python script for analyzing Azure Virtual Network Gateway (VPN Gateway) routing information, connections, and BGP peer status. <br>
+This tool provides detailed information on connection health, BGP peer status, and route exchange in clean, readable tabular format. <br>
+This tool is built using the Azure SDK for Python.
 
  ## Quick Overview
 
