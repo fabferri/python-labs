@@ -238,7 +238,7 @@ az account list
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - See [LICENSE](../LICENSE) file for details.
 
 `Tag: Azure AI Foundry models, OpenAI` <br>
 `date: 07-11-2025`
