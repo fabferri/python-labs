@@ -1,4 +1,21 @@
-# Azure AI Foundry Multi-Model Deployment and Chat System
+<properties
+pageTitle= 'Azure AI Foundry multi-model deployment and chat in terminal'
+description= "Azure AI Foundry multi-model deployment and chat in terminal"
+documentationcenter= "https://github.com/fabferri"
+services="AI Foundry"
+authors="fabferri"
+editor="fabferri"/>
+
+<tags
+   ms.service="configuration-Example"
+   ms.devlang="python"
+   ms.topic="article"
+   ms.tgt_pltfrm="AI Foundry"
+   ms.workload="OpenAI Model"
+   ms.date="09/11/2025"
+   ms.author="fabferri" />
+
+# Azure AI Foundry multi-model deployment and chat in terminal
 
 Python scripts for deploying Azure OpenAI models to Azure AI Foundry, managing capacity upgrades, and interacting with AI agents through an interactive chat interface.
 
@@ -439,4 +456,9 @@ az cognitiveservices account deployment list --name <resource-name> --resource-g
 az cognitiveservices account deployment show --name <resource-name> --resource-group <rg-name> --deployment-name <deployment-name> --query "{State:properties.provisioningState, Capacity:sku.capacity}" --output table
 ```
 
+## License
 
+This project is licensed under the MIT License - See [LICENSE](../LICENSE) file for details.
+
+`Tag: Azure AI Foundry models, OpenAI` <br>
+`date: 09-11-2025`
