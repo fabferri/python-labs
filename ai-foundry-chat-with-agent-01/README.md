@@ -1,6 +1,6 @@
 <properties
-pageTitle= 'Azure AI Foundry multi-model deployment and chat in terminal'
-description= "Azure AI Foundry multi-model deployment and chat in terminal"
+pageTitle= 'Azure AI Foundry multi-model deployment and interactive chat'
+description= "Azure AI Foundry multi-model deployment and interactive chat"
 documentationcenter= "https://github.com/fabferri"
 services="AI Foundry"
 authors="fabferri"
@@ -15,7 +15,7 @@ editor="fabferri"/>
    ms.date="09/11/2025"
    ms.author="fabferri" />
 
-# Azure AI Foundry multi-model deployment and chat in terminal
+# Azure AI Foundry multi-model deployment and interactive chat
 
 Python scripts for deploying Azure OpenAI models to Azure AI Foundry, managing capacity upgrades, and interacting with AI agents through an interactive chat interface.
 
