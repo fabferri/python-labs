@@ -255,14 +255,26 @@ Runtime wires components together; it should not contain core gameplay rules.
 
 ### Data Flow Example
 
-1. Player presses a key.
-2. `game.py` event loop catches `KEYDOWN`.
-3. `PygameActionInput.action_for_key(key)` translates key → action name (e.g., `"shoot"`).
-4. `game.py` calls `services.PlayerController.update(state, dt, controls, sound)`.
-5. `PlayerController` checks `controls.pressed("shoot")` and calls domain system: `Bullet(...)` added to state.
-6. `game.py` calls `renderer.draw(state)` which renders domain state via pygame.
+The diagram below shows how a single player input travels through all architectural layers during one frame:
 
-At no point do domain or service layers know about pygame.
+```text
+[Hardware]  →  [Runtime]  →  [Adapter]  →  [Service]  →  [Domain]  →  [Adapter]  →  [Display]
+  Key press     game.py      input.py     services.py    systems.py   renderer.py    pygame surface
+```
+
+**Step-by-step walkthrough (shooting example):**
+
+| # | Layer | What happens |
+|---|-------|-------------|
+| 1 | **Hardware** | Player presses `Space`. |
+| 2 | **Runtime** (`game.py`) | The `pygame` event loop receives a `KEYDOWN` event and forwards the key to the input adapter. |
+| 3 | **Adapter** (`input.py`) | `PygameActionInput.action_for_key(key)` maps the `pygame` key constant to the semantic action `"shoot"`. No domain code sees the raw key. |
+| 4 | **Runtime** (`game.py`) | Calls `PlayerController.update(state, dt, controls, sound)`, passing the semantic controls object. |
+| 5 | **Service** (`services.py`) | `PlayerController` queries `controls.pressed("shoot")`, then delegates to the domain: a new `Bullet` is appended to `state.bullets`. |
+| 6 | **Domain** (`systems.py`) | On the next `WorldUpdater` tick, bullet-movement and collision rules advance the bullet position and detect hits—pure deterministic logic, zero framework imports. |
+| 7 | **Adapter** (`renderer.py`) | `renderer.draw(state)` reads the updated domain state and renders all entities onto the `pygame` surface. |
+
+> **Key invariant:** Domain and service layers never import `pygame`. All framework coupling is isolated to the adapter and runtime layers.
 
 ### Boundary Rules
 
@@ -301,4 +313,5 @@ Use these rules as a quick architecture checklist when adding or reviewing code.
 - Domain functions remain deterministic and framework-agnostic.
 - Rendering code does not introduce gameplay state mutations.
 
-
+`Tag: arcade, game, python` <br>
+`date: 08-05-2026`
