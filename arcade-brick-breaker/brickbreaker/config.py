@@ -1,0 +1,61 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+SCREEN_WIDTH = 960
+SCREEN_HEIGHT = 800
+FPS = 60
+
+PADDLE_WIDTH = 130
+PADDLE_HEIGHT = 18
+PADDLE_SPEED = 9
+
+BALL_SIZE = 14
+BALL_START_SPEED_X = 5
+BALL_START_SPEED_Y = -5
+MAX_BALL_SPEED = 11
+
+BRICK_ROWS = 8
+BRICK_COLUMNS = 12
+BRICK_HEIGHT = 26
+BRICK_GAP = 4
+BRICK_TOP_OFFSET = 80
+BRICK_SIDE_PADDING = 50
+BRICK_MIN_PADDLE_GAP = 200
+
+START_LIVES = 3
+MAX_LEVEL = 12
+
+PADDLE_MIN_WIDTH = 86
+PADDLE_SHRINK_PER_LEVEL = 3
+BALL_LEVEL_SPEED_STEP = 0.35
+
+BACKGROUND_COLOR = (8, 12, 24)
+WALL_COLOR = (30, 40, 65)
+TEXT_COLOR = (240, 245, 255)
+PADDLE_COLOR = (90, 200, 255)
+BALL_COLOR = (255, 245, 210)
+MENU_OVERLAY_COLOR = (6, 10, 20)
+PAUSE_OVERLAY_COLOR = (10, 14, 26)
+ACCENT_COLOR = (255, 209, 91)
+
+HIGH_SCORE_FILE = Path(__file__).resolve().parent.parent / "high_score.json"
+
+# Two rows per color to mimic classic arcade layout.
+BRICK_COLORS = [
+    (255, 80, 80),
+    (255, 80, 80),
+    (255, 165, 66),
+    (255, 165, 66),
+    (80, 205, 110),
+    (80, 205, 110),
+    (250, 220, 60),
+    (250, 220, 60),
+]
+
+BRICK_POINTS = {
+    (250, 220, 60): 1,
+    (80, 205, 110): 3,
+    (255, 165, 66): 5,
+    (255, 80, 80): 7,
+}
