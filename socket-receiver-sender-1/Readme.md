@@ -17,29 +17,33 @@ editor=""/>
 
 # Socket-Based Messaging in Python: sender and receiver
 
-`async_tcp_server.py`: it is the receiver <br>
-`async_tcp_client.py`: it is the sender <br>
+- `async_tcp_server.py`: it is the receiver
+- `async_tcp_client.py`: it is the sender
 
 
-<br>
+## async_tcp_server.py
 
-**async_tcp_server.py** <br>
 This asynchronous TCP server handles multiple client connections using asyncio, logging incoming data with timestamps and packet size comparisons. It supports optional UTF-8 decoding, queues incoming messages for processing, and ensures graceful shutdown on interruption. Designed for single-threaded operation (Windows-compatible), it provides detailed logging to both console and file for monitoring and debugging.
 
-<br>
 
-**async_tcp_client.py** <br>
+
+## async_tcp_client.py
+
 This Python script uses asyncio to simulate multiple parallel TCP client connections to a server. Each client sends batches of messages with optional encoding, handles connection errors gracefully, and includes configurable parameters for host, port, number of connections, and message batches. It demonstrates asynchronous communication, error handling, and controlled message flow using delays.
 
-variables in `async_tcp_client.py`: <br>
+variables in `async_tcp_client.py`:
+
+```text
 HOST = '127.0.0.1'             # keep this value if client and server run both on the same VM
 PORT = 33388                   # listen port on the server
 ENCODE_MESSAGES = False        # Set to False to send messages without encoding utf-8
 NUM_CONNECTIONS = 5            # Number of parallel connections to create
 MESSAGES_PER_CONNECTION = 100  # Number of message batches per connection
+```
 
-`Tags: Python, Visual Studio Code` <br>
-`date: 04-10-25` <br>
+`Tags: Python, Visual Studio Code`
+
+`date: 04-10-25`
 
 <!--Image References-->
 
